@@ -1,0 +1,21 @@
+_______________________________________________________________________________
+1. Mencione dos ventajas y dos desventajas de utilizar <canvas>
+R:
+_______________________________________________________________________________
+2. ¿Que dibuja en el canvas el siguiente código?, ¿Cuál es el área?
+	var canvas=document.getElementById("lienzo");
+	canvas.fillRect(50,50,100,200);
+R:
+_______________________________________________________________________________
+3. Cree una página que utilizando la etiqueta canvas dibuje una estrella
+R:
+_______________________________________________________________________________
+4. Haga que la estrella (del ejercicio anterior) reduzca su tamaño en 50%
+R:
+_______________________________________________________________________________
+5. OPCIONAL: Haga que la estrella rote indeterminadamente
+PISTA:
+setInterval(FUNCION, 1000/300);
+R:
+	
+	

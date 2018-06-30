@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>[Web SQL Storage]</title>
+    <meta charset="utf-8" />
+    <script>
+      // Abrir una BD por nombre
+      var db = openDatabase('contactos', '1.0', 'Mi app de clientes', 2 * 1024 * 1024);
+      //
+      function muestraTabla(id, nombre, telefono) {
+        var renglon = document.createElement("tr");
+        var celdaId = document.createElement("td");
+        var celdaNombre = document.createElement("td");
+        var celdaTelefono = document.createElement("td");
+        celdaId.textContent = id;
+        celdaNombre.textContent = nombre;
+        celdaTelefono.textContent = telefono;
+        renglon.appendChild(celdaId);
+        renglon.appendChild(celdaNombre);
+        renglon.appendChild(celdaTelefono);
+        document.getElementById("clientes").appendChild(renglon);
+      }
+      // Recargar la tabla
+      function recargar() {
+        document.getElementById("clientes").innerHTML = "<th>Id</th><th>Nombre</th><th>Teléfono</th>";
+        db.transaction(function(tx) {
+          tx.executeSql('SELECT * FROM clientes', [], function(tx, rs) {
+            for (var i = 0; i < rs.rows.length; i++) {
+              var cliente = rs.rows.item(i);
+              muestraTabla(cliente.id, cliente.nombre, cliente.telefono);
+            }
+          });
+        });
+      }
+      // Inicializa la BD
+      function inicializaBD() {
+        var datos = ["Juan López", "Juan Pérez", "Juana Hernández"];
+        db.transaction(function(tx) {
+          tx.executeSql('CREATE TABLE IF NOT EXISTS clientes (id integer primary key autoincrement, nombre, telefono)');
+          for (var i = 0; i < datos.length; i++) {
+            tx.executeSql('INSERT INTO clientes (nombre,telefono) VALUES (?,?)', [datos[i], ("5555-" + (5500 + i))]);
+          }
+          recargar();
+        });
+      }
+      // Da de alta un registro
+      function alta() {
+        var _nombre = document.getElementById("nombre").value;
+        var _telefono = document.getElementById("telefono").value;
+        db.transaction(function(tx) {
+          tx.executeSql('INSERT INTO clientes (nombre,telefono) VALUES (?,?)', [_nombre, _telefono]);
+          recargar();
+        });
+      }
+
+    </script>
+  </head>
+  <body>
+    <h1>Web SQL Database</h1>
+    <br/>
+    <button onclick="inicializaBD();" type="button">Carga Inicial</button>
+    <button onclick="recargar();" type="button">Recargar</button>
+    <br/>
+    Nombre:<input id="nombre" type='text' value="Nombre"/>&nbsp;Teléfono: <input id="telefono" type='text' placeholder="5555-5555"/>&nbsp;<button onclick="alta();" type="button">Alta</button>
+    <br/>
+    Id: <input id="id" type='text' placeholder="Llave primaria"/>&nbsp;<button onclick="alert('ToDo: Implementar Baja');" type="button">Baja</button><button onclick="alert('ToDo: Implementar Baja de todos los registros');" type="button">Baja Total</button>
+    <br>
+    <table id="clientes" border="1" style="width:80%">
+      <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Teléfono</th>
+      </tr>
+    </table>
+  </body>
+</html>

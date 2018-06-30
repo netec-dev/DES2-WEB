@@ -1,0 +1,10 @@
+CACHE MANIFEST
+#Version 1
+
+CACHE:
+offline.html
+mm/mov_bbb_cache.ogg
+
+NETWORK:
+online.html
+mm/mov_bbb_network.ogg

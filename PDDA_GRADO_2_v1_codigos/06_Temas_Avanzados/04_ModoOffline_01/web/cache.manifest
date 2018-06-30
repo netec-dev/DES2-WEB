@@ -1,0 +1,12 @@
+CACHE MANIFEST
+
+CACHE:
+style.css
+script.js
+index.html
+
+NETWORK:
+style2.css
+
+FALLBACK:
+imgs/ nodisponible.jpg

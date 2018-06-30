@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>[Web Workers]</title>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <div id="info">Obtener el mayor número primo:&nbsp;<output id="res"></output></div>
+    <input id="hasta" name="hasta" type="number" min="1000" value="100000" step="1000" required>
+    <button onclick="calculaPrimos();">Obtener n&uacute;mero primo</button> 
+    <br><br>
+    <input id="a" name="a" type="number" required> +
+    <input id="b" name="b" type="number" required>
+    <button onclick="sumar();">=</button>
+    <input id="r" name="r" type="text">
+    <br>
+    <script>
+
+      function calculaPrimos() {
+        for (var i = 4; i < Number(document.getElementById("hasta").value); i++) {
+          primo = 0;
+          for (j = 2; j < i; j++) {
+            if (i % j === 0)
+              primo = 1;
+          }
+          if (primo === 0) {
+            muestraInfo(i);
+          }
+        }
+      }
+      //
+      //
+      function sumar(_a, _b) {
+        var r = Number(document.getElementById("a").value) + Number(document.getElementById("b").value);
+        document.getElementById("r").value = r;
+      }
+      //////////////////////////////////////////////////////////////////////////
+      // Muestra información en una 'barra de estatus'
+      function muestraInfo(_res, _tiempo) {
+        if (_tiempo === undefined)
+          _tiempo = 300000; // 5 min
+        document.getElementById("res").innerHTML = _res;
+        setTimeout(function() {
+          document.getElementById("res").innerHTML = "&nbsp;";
+        }, _tiempo);
+      }
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>[Almacenaje de Datos]</title>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <div id="info">&nbsp;</div>
+    <form id="pago" action="javascript:errorEnServidor();" method="POST">
+      <fieldset>
+        <legend>Informaci&oacute;n Personal</legend>
+        <ol>
+          <li>
+            <label for="nombre">Nombre</label>
+            <input id="nombre" name="nombre" type="text" placeholder="Nombre Apellidos" >
+          </li>
+          <li>
+            <label for="correoE">Correo Electr&oacute;nico</label>
+            <input id="correoE" name="correoE" type="email" placeholder="usuario@dominio.com" size="40" >
+          </li>
+          <li>
+            <label for="sitioWeb">Sitio Web</label>
+            <input id="sitioWeb" name="sitioWeb" type="url" placeholder="http://www.dominio.com" size="50" >
+          </li>
+        </ol>
+      </fieldset>
+      <fieldset>
+        <button type="submit">Enviar</button>
+      </fieldset>
+    </form>
+    <script>
+      // Simula un error en el servidor y recarga la página
+      function errorEnServidor() {
+        setTimeout("location.href='formulario.html?responseCode=500'", 1000);
+      }
+      // Muestra información en una 'barra de estatus'
+      function muestraInfo(_res) {
+        document.getElementById("info").innerHTML = _res;
+        setTimeout(function() {
+          document.getElementById("info").innerHTML = "&nbsp;";
+        }, 1000);
+      }
+    </script>
+  </body>
+</html>

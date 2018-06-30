@@ -1,0 +1,22 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <title>Documento B</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h4>https://localhost:8181/07_MensajesEntreDocumentosB/do/DocB.html</h4>
+    <input id="msj" type="text" disabled />
+    <input type="button" value="Responder" onClick="responder();" disabled />
+    <div id="info"></div>
+    <script>
+        window.addEventListener("message", recibirMsj);
+     
+        function recibirMsj(evt) {
+        	var d = document.getElementById("info");
+            d.innerHTML += "[" +evt.origin + "]:<span style=\"color:red\">" + evt.data + "</span><br />";
+            event.source.postMessage('Respuesta autom&aacute;tica', event.origin);
+        }
+    </script>
+</body>
+</html>

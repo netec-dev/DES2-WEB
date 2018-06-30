@@ -1,0 +1,14 @@
+_______________________________________________________________________________
+1. Cree una pagina web que contenga un reproductor de música.
+  Pistas: 
+  	a. reproductor = document.getElementById(NOMBRE_DE_LA_ETIQUETA_DE_AUDIO);
+  	b. reproductor.play();
+_______________________________________________________________________________
+2.  OPCIONAL: Muestre el segundo que se esta reproduciendo.
+	Pistas:
+		a. Propiedades currentTime y duration
+		b. Deberá registrar un gestor de eventos el formato es:
+			ELEMENTO.addEventListener('NOMBRE_DE_EVENTO', FUNCION);
+		c. El evento para escuchar los cambios en el tiempo actual de 
+		   reproducción es: timeupdate
+	

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <servlet>
+        <servlet-name>OtroOrigen</servlet-name>
+        <servlet-class>pmoo.OtroOrigen</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MismoOrigen</servlet-name>
+        <servlet-class>pmoo.MismoOrigen</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OtroOrigen</servlet-name>
+        <url-pattern>/do/prueba_jsonp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MismoOrigen</servlet-name>
+        <url-pattern>/mo/prueba_jsonp</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>RecursoRestringido</web-resource-name>
+            <description/>
+            <url-pattern>/do/*</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+</web-app>

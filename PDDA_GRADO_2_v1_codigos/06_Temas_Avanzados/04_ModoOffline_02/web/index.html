@@ -1,0 +1,88 @@
+<!DOCTYPE html> 
+<html manifest="offline.appcache">
+  <head>
+    <title>[Modo Offline]</title>
+    <meta charset="utf-8" />
+  </head>
+  <body> 
+    <fieldset><legend>Información</legend>
+      <div id="info"></div>
+    </fieldset><br/>
+    <a href="online.html">Contenido EN-LINEA</a>
+    <a href="offline.html">Contenido FUERA-DE-LINEA</a>
+    <br>
+    <br>
+    <a href="mm/mov_bbb_network.ogg">mm/mov_bbb_network.ogg (NETWORK)</a>
+    <a href="mm/mov_bbb_cache.ogg">mm/mov_bbb_cache.ogg (CACHE)</a>
+    <br>
+    <script>
+      // Indica el estatus inicial
+      function statusInicial() {
+        var status = "offline";
+        if (navigator.onLine)
+          status = "online";
+        muestraInfo("Status: " + status);
+        //
+        if (!window.applicationCache) {
+          muestraInfo("La caraterística HTML5 offline (ApplicationCache) no es soportada por el navegador.");
+        } else {
+          // Códigos de estatus a mensajes
+          var statusMessages = ["Uncached", "Idle", "Checking", "Downloading", "Update Ready", "Obsolete"];
+          muestraInfo("Status inicial AppCache: " + statusMessages[window.applicationCache.status]);
+        }
+      }
+
+      var counter = 1;
+      function muestraInfo(_msj) {
+        var p = document.createElement("p");
+        p.innerHTML = _msj;
+        document.getElementById("info").appendChild(p);
+      }
+
+      // Eventos
+      window.addEventListener("load", statusInicial, true);
+      window.addEventListener("online", function(e) {
+        muestraInfo("EN LINEA");
+      }, true);
+      window.addEventListener("offline", function(e) {
+        muestraInfo("FUERA DE LINEA");
+      }, true);
+      // log each of the events fired by window.applicationCache
+      window.applicationCache.onchecking = function(e) {
+        muestraInfo("Revisando actualizaciones");
+      };
+      window.applicationCache.onnoupdate = function(e) {
+        muestraInfo("No se encontraron actualizaciones");
+      };
+      window.applicationCache.onupdateready = function(e) {
+        muestraInfo("Actualización completa");
+      };
+      window.applicationCache.onobsolete = function(e) {
+        muestraInfo("Memoria Cache obsoleta");
+      };
+      window.applicationCache.ondownloading = function(e) {
+        muestraInfo("Descargando actualizaciones");
+      };
+      window.applicationCache.oncached = function(e) {
+        muestraInfo("En cache (oncached)");
+      };
+      window.applicationCache.onerror = function(e) {
+        muestraInfo("ApplicationCache ERROR");
+        var result = "";
+        for (var key in e) {
+          if (e.hasOwnProperty(key)) {
+            result += key + ": " + e[key] + "<br>";
+          }
+        }
+        muestraInfo("EXCEPCIÓN<br/>" + result);
+      };
+      window.applicationCache.onprogress = function(e) {
+        muestraInfo("Progreso: Descargando archivo " + counter);
+        counter++;
+      };
+
+
+    </script>
+
+  </body> 
+</html>

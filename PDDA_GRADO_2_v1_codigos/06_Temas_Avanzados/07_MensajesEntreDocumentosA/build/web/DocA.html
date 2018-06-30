@@ -1,0 +1,27 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <title>Documento A</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h4>http://localhost:8080/07_MensajesEntreDocumentosA/DocA.html</h4>
+    <input id="msj" type="text" />
+    <input type="button" value="Responder" onClick="responder();" />
+    <div id="info"></div>
+    <script>
+        window.addEventListener("message", recibirMsj);
+
+        function responder() {
+        	var msj = document.getElementById("msj").value;
+            parent.postMessage("[" + location.host + "]: " + msj, "http://localhost:8080");
+        }
+
+        
+        function recibirMsj(evt) {
+        	var d = document.getElementById("info");
+            d.innerHTML += "[" +evt.origin + "]:<span style=\"color:red\">" + evt.data + "</span><br />";
+        }
+    </script>
+</body>
+</html>

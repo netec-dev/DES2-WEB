@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Contador de clics</title>
+        <meta charset="utf-8">
+        <script>
+            function contadorDeClic() {
+                if (typeof (Storage) !== "undefined") {
+                    if (sessionStorage.contador) {
+                        sessionStorage.setItem("contador", Number(sessionStorage.contador) + 1);
+                    } else {
+                        sessionStorage.setItem("contador", 1);
+                    }
+                    document.getElementById("valorContador").innerHTML = "Contador= " + sessionStorage.getItem("contador");
+                } else {
+                    document.getElementById("valorContador").innerHTML = "El navegador no soporta Web Storage”                                                           “ soporta Web Storage";
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <section id="valorContador">Contador= ?</section>
+        <button onclick="contadorDeClic();" type="button">Haga Clic aqu&iacute;</button>
+        <p>Cierra la ventana/pesta&ntilde;a, e intenta nuevamente.</p>
+    </body>
+</html>

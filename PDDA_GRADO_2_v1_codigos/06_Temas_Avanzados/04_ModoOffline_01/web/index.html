@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+
+<html manifest="cache.manifest">
+    <head>
+
+        <link rel="stylesheet" href="style.css" type="text/css" />
+        <link rel="stylesheet" href="style2.css" type="text/css" />
+        <script src="script.js"></script>
+
+    </head>
+    <body>
+        <h1>Ejemplo de utilizaci&oacute;n de 'Application Cache' : CACHE, NETWORK y FALLBACK</h1>
+
+        <div id="galeria">
+            <h2>Galer&iacute;a de colores</h2>
+            <img src="imgs/verde.jpg" alt="Verde" />
+            <img src="imgs/rojo.jpg" alt="Rojo" />
+        </div>
+
+        <div id="mensage">
+            <p>Desconectese de Internet y recarge la p&aacute;gina.</p>
+            <ul>
+                <li>Qu&eacute; sucede?</li>
+                <li><span class="nota">NETWORK:</span> La informaci&oacute;n del color de fondo esta en 'style2.css'.</li>
+                <li><span class="nota">FALLBACK:</span> Al desconectarse de internet, todos los archivos de la carpeta 'imgs'  se remplazar&aacute;n por el archivo 'nodisponible.jpg' como la imagen de 'fallback'.</li>
+            </ul>
+        </div>
+    </body>
+</html>

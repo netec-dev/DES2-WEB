@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            var funcionCallback = function(datosJson) {
+                alert(datosJson.propiedad1);
+                alert(datosJson.propiedad2);
+            }
+            var funcionCallback2 = function(datosJson) {
+                document.getElementById("dato1").innerHTML = datosJson.propiedad1;
+                document.getElementById("dato2").innerHTML = datosJson.propiedad2;
+            }
+        </script>
+    </head>
+    <body>
+        <h2>Valor obtenido del servidor (Diferente Origen)</h2>
+        <span id="dato1"></span>/<span id="dato2"></span>
+        <!-- JSONP -->
+        <script src="https://localhost:8181/07_PMismoOrigen/do/prueba_jsonp?callback=funcionCallback2"></script>
+    </body>
+</html>

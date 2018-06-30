@@ -1,0 +1,45 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <h3>Mensajes entre documentos</h3>
+    <div id="info"></div>
+    <div id="divA">
+      <input type="text" id="txtA" /> <input type="button" value="Enviar" onclick="enviarMsj('DocA');" />
+      <br />
+      <iframe id="ifrA" src="http://localhost:8080/07_MensajesEntreDocumentosA/DocA.html"></iframe>
+    </div>
+    <div id="divB">
+      <input type="text" id="txtB" /><input type="button" value="Post Message" onclick="enviarMsj('DocB');" />
+      <br />
+      <iframe id="ifrB" src="https://localhost:8181/07_MensajesEntreDocumentosB/do/DocB.html"></iframe>
+    </div>
+
+    <script type="text/javascript">
+          window.addEventListener("message", recibirMsj);
+
+          function recibirMsj(evt) {
+            var info = document.getElementById("info");
+            info.innerHTML += "[" + evt.origin + "]:<span style=\"color:blue\">" + evt.data + "</span><br />";
+          }
+
+          function enviarMsj(domain) {
+            switch (domain) {
+              case "DocA":
+                var ifr = document.getElementById("ifrA");
+                ifr.contentWindow.postMessage(document.getElementById("txtA").value, "http://localhost:8080");
+                break;
+              case "DocB":
+                var ifr = document.getElementById("ifrB");
+                ifr.contentWindow.postMessage(document.getElementById("txtB").value, "https://localhost:8181");
+                break;
+              default:
+                throw new error("Dominio inválido");
+            }
+          }
+    </script>
+  </body>
+</html>

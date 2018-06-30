@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            //
+            function obtenDatos() {
+                var xmlhttp;
+                if (window.XMLHttpRequest) {//  IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                } else {// IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        var datosMO = xmlhttp.responseText;
+                        datosJson=eval('('+datosMO+')'); 
+                        document.getElementById("dato1").innerHTML = datosJson.propiedad1;
+                        document.getElementById("dato2").innerHTML = datosJson.propiedad2;
+                    }
+                }
+                xmlhttp.open("GET", "http://localhost:8080/07_PMismoOrigen/mo/prueba_jsonp", true);
+                xmlhttp.send();
+            }
+        </script>
+    </head>
+    <body>
+        <h2>Valor obtenido del servidor (Mismo Origen)</h2>
+        <span id="dato1"></span>/<span id="dato2"></span><br/>
+        <button type="button" onclick="obtenDatos();">Obten Datos</button>
+    </body>
+</html>

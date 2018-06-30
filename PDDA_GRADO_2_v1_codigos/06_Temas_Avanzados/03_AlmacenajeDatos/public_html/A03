@@ -1,0 +1,16 @@
+_______________________________________________________________________________
+1. Liste algunos usos típicos de esta tecnología
+ 
+_______________________________________________________________________________ 
+2. ¿Es aplicable en su negocio?, ¿para qué?
+
+_______________________________________________________________________________
+3. Implemente el mecanismo de guardado automático en la página formulario.html 
+Utilice Web Storage
+
+_______________________________________________________________________________
+4. Ejecute y analice el comportamiento de las demostraciones del módulo
+
+_______________________________________________________________________________
+5. OPCIONAL: Adicione la funcionalidad de baja basado en el identificador de 
+   clientes en la página WebSqlStorage.html

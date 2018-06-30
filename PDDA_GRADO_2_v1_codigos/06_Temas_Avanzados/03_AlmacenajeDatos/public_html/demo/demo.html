@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>[Almacenaje de Datos]</title>
+    <meta charset="utf-8">
+
+    <script type="text/javascript">
+
+    // ¿Soporta almacenaje? 
+      function esCompatible() {
+        if ((window.Storage !== undefined)) { // ¿Existe la interfaz?
+          muestraResultado('Este navegador acepta almacenamiento local (Web Storage)');
+        } else {
+          muestraResultado('Lo siento, este navegador no acepta almacenamiento local(Web Storage)');
+        }
+      }
+    // Alta/Modificación de información
+      function guardaActualiza(_donde) {
+        var storage;
+        if (_donde === "local") {
+          storage = window.localStorage;
+        } else {
+          storage = window.sessionStorage;
+        }
+        storage.setItem(document.getElementById("clave").value, document.getElementById("valor").value);
+        muestraResultado('Clave/Valor almacenado ' + document.getElementById("clave").value + '=' + document.getElementById("valor").value);
+      }
+    // Borrado de la información
+      function borradoAlmacenaje(_cual) {
+        if (_cual === "local" || _cual === "ambos" || _cual === undefined) {
+          window.localStorage.clear();
+        }
+        if (_cual === "session" || _cual === "ambos" || _cual === undefined) {
+          window.sessionStorage.clear();
+        }
+      }
+    //
+
+    //
+      function lanzaQUOTA_EXCEEDED() {
+        // Limite de iteraciones
+        var cienK = 100000;
+        // Datos (Aprox 1KB)
+        var valor1K = "DATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOS" +
+                "DATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOS" +
+                "DATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOS" +
+                "DATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOS" +
+                "DATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOS" +
+                "DATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOS" +
+                "DATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOS" +
+                "DATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOS" +
+                "DATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOS" +
+                "DATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOSDATOS" +
+                "DATOSDATOSDATOSDATOS"; // -4 nombre llave aprox
+        // Limpieza del espacio de almacenaje
+        window.sessionStorage.clear();
+        try {
+          var datos = "";
+          for (var i = 0; i < cienK; i++) {
+            window.sessionStorage.setItem("v" + i, valor1K);
+          }
+          var result = "Tamaño de almacenaje: " + window.sessionStorage.length * 1024 + " bytes<br>";
+          muestraResultado("EXITO<br/>" + result);
+        } catch (e) { // e == QUOTA_EXCEEDED_ERR
+          var result = "Tamaño de almacenaje: " + window.sessionStorage.length * 1024 + " bytes<br>" + e.toString() + "<br><br>";
+          for (var key in e) {
+            if (e.hasOwnProperty(key)) {
+              result += key + ": " + e[key] + "<br>";
+            }
+          }
+          muestraResultado("EXCEPCIÓN<br/>" + result);
+        }
+      }
+
+    ///////////////////////////////////////////////////////////////////////////////
+    // UI
+    /////
+    // Información al usuario
+      function muestraResultado(_res) {
+        document.getElementById("resultado").innerHTML = _res;
+      }
+    </script>
+
+  </head>
+
+  <body>
+    <h1>Web Storage Test</h1>
+
+    <button onClick="javascript:esCompatible();" >¿Compatible?</button> <br/>
+    Clave: <input id="clave" type='text' value="Clave"/>&nbsp;Valor: <input id="valor" type='text' value="Valor"/>&nbsp;<br/>
+    <button onClick="javascript:guardaActualiza('local');">Almacena en localStorage</button><button onClick="javascript:guardaActualiza('session');">Almacena en sessionStorage</button><br/>
+    <button onClick="javascript:borradoAlmacenaje('local');" >Borrar localStorage</button>
+    <button onClick="javascript:borradoAlmacenaje('session');" >Borrar sessionStorage</button>
+    <button onClick="javascript:borradoAlmacenaje();" >Borrar localStorage y sessionStorage</button><br/>
+    <button onClick="javascript:lanzaQUOTA_EXCEEDED();" >Tamaño límite</button>
+
+    <fieldset><legend>Informaci&oacute;n</legend>
+      <div id="resultado">&nbsp;</div>
+    </fieldset>
+
+    <br/>
+  </body>
+</html>

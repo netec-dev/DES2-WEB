@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <script type="text/javascript">
+
+      function subirArchivo() {
+        var filesToBeUploaded = document.getElementById("nombreArchivo");
+        var file = filesToBeUploaded.files[0];
+        var xhrObj = new XMLHttpRequest();
+        xhrObj.upload.addEventListener("loadstart", iniciaCarga);
+        xhrObj.upload.addEventListener("progress", progreso);
+        xhrObj.upload.addEventListener("load", terminaCarga);
+        xhrObj.open("POST", "#", true);
+        xhrObj.setRequestHeader("Content-type", file.type);
+        xhrObj.setRequestHeader("X_FILE_NAME", file.name);
+        xhrObj.send(file);
+      }
+
+      function progreso(evt) {
+        var barraProgreso = document.getElementById("barraProgreso");
+        var porcentaje = document.getElementById("porcentaje");
+        if (evt.lengthComputable) {
+          barraProgreso.max = evt.total;
+          barraProgreso.value = evt.loaded;
+          porcentaje.innerHTML = " " + Math.round(evt.loaded / evt.total * 100) + "%";
+        }
+      }
+
+      function iniciaCarga(evt) {
+        alert('Inicia la carga');
+      }
+      function terminaCarga(evt) {
+        alert('Carga completada');
+      }
+    </script>
+  </head>
+  <body>
+    <input id="nombreArchivo" type="file" />
+    <br/>
+    <input type="button" onclick="subirArchivo();" name="subirArchivo" value="Subir Archivo" />
+    <progress id="barraProgreso" value="0" max="10"></progress><span id="porcentaje"></span>
+  </body>
+</html>

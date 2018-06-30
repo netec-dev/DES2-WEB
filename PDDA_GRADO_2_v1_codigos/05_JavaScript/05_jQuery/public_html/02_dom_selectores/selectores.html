@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <style type="text/css">
+      .rojo{
+        color: #cc0000;
+      }
+      .verde{
+        color: #00cc00;
+      }
+      .azul{
+        color: #0000cc;
+      }
+      .fondogris{
+        background-color: #cccccc;
+      }
+      body{
+        font-family: verdana, arial, helvetica;
+      }
+      div{
+        margin-bottom: 4px;
+      }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  </head>
+
+  <body>
+    <h1>Selectores</h1>
+    <p>Utilice esta página para realizar las actividades.</p>
+    <form>
+      Selector: <input type="Text" name="selector" id="selector">
+      <input type="button" id="boton" value="Ver qué elementos seleccionas"> <input type="button" name="refrescar" id="refrescar" value="Refrescar">
+    </form>
+
+    <p id="p1" class="rojo">Este es un párrafo con id="p1" y class="rojo"</p>
+
+    <p id="p2" class="verde">Este es un párrafo con id="p2" y class="verde" y aquí <i>meto una itálica</i></p>
+
+    <p id="p3" class="rojo fondogris">Este es un párrafo con id="p3" y class="rojo fondogris" (es decir, este elemento tiene aplicadas las clases "rojo" y "fondogris"</p>
+
+    <p id="p4">Este es un párrafo con id="p4", sin class</p>
+
+    <p>Este es un párrafo con sin id ni class</p>
+
+    <div id="div1">Esto es una división con id="div1"</div>
+
+    <div id="div2" class="rojo">Esto es una división con id="div2" y class="rojo" y aqui <b>meto una negrita</b></div>
+
+    <div id="div3" class="verde fondogris">Esto es una división con id="div3" y class="verde fondogris"</div>
+
+    <div>Esto es una división sin id ni class</div>
+
+    <div class="azul">Esto es una división sin id, con class="azul"</div>
+
+    <div style="border-color: #0000cc; border-style: dotted;">
+      <ul>
+        <li>elemento 1</li>
+        <li>elemento 2</li>
+        <li>elemento 3</li>
+        <li>elemento 4</li>
+        <li>elemento 5</li>
+      </ul>
+      <b>Esto es una etiqueta b</b><br>
+
+      <i>Esto es una etiqueta i</i>
+    </div>
+
+
+    <script>
+      $(document).ready(function() {
+        $("#boton").click(function(evento) {
+          var selectorEscrito = $("#selector").prop("value");
+          if (selectorEscrito === "") {
+            alert("Escribe algo en el campo de texto");
+          } else {
+            elementosSeleccionados = $(selectorEscrito);
+            elementosSeleccionados.css('background-color', '#FFFF00');
+          }
+        });
+
+        //
+
+        $('#refrescar').click(function() {
+          // Recargo la página
+          location.reload();
+        });
+      });
+    </script>
+  </body>
+</html>

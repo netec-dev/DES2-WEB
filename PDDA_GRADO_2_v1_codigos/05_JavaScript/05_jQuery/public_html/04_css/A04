@@ -1,0 +1,17 @@
+_______________________________________________________________________________
+1. Indique alguna buena práctica en la manipulación de CSS
+R:
+
+
+_______________________________________________________________________________
+2. De la página colorBg.html determine el color de fondo del elemento div3. 
+OPCIONAL:
+Haga que todos los div cambien al color del div3
+R:
+
+
+_______________________________________________________________________________
+3. Demuestre el uso del método .toggleClass()
+Pista:
+Utilice el método .click() 
+

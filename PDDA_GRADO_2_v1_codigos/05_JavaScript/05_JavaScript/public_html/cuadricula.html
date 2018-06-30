@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Manipulación del DOM</title>
+    <meta charset="utf-8" />
+    <script src="cuadricula.js" type="text/Javascript"></script>
+  </head>
+  <body onload="setupPag(9);
+      gridInicial();">
+
+    <h1 id="titulo">Cuadr&iacute;cula</h1>
+    <p id="info">Iniciando la carga...</p>
+    <p>
+      <a href=Javascript:gridInicial();>Restablecer Cuadr&iacute;cula</a>
+    </p>        
+
+    <table border="1" id="tabla">
+      <tr>
+        <td><p id="elemento1.1"></p></td>
+        <td><p id="elemento2.1"></p></td>
+      </tr>
+      <tr>
+        <td><p id="elemento1.2"></p></td>
+        <td><p id="elemento2.2"></p></td>
+      </tr>
+    </table>
+    <p>
+      Mover a la <a href=Javascript:mueveGrid("derecha");>derecha</a>, 
+      <a href=Javascript:mueveGrid("izquierda");>izquierda</a>, 
+      <a href=Javascript:mueveGrid("arriba");>arriba</a>,
+      <a href=Javascript:mueveGrid("abajo");>abajo</a>
+    </p>
+
+  </body>
+</html>
